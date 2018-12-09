@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- service -->
+	<bean id="ServiceImpl" class="com.seesawin.IOC.service.impl.ServiceImpl">
+	</bean>
+
+	<bean id="ServiceImpl2" class="com.seesawin.IOC.service.impl.ServiceImpl2">
+		<constructor-arg ref="DaoImpl2"></constructor-arg>
+	</bean>
+	<bean id="ServiceImpl3" class="com.seesawin.IOC.service.impl.ServiceImpl3">
+		<property name="dao" ref="DaoImpl3"></property>
+	</bean>
+
+	<!-- dao -->
+	<bean id="DaoImpl2" class="com.seesawin.IOC.dao.impl.DaoImpl2"></bean>
+	<bean id="DaoImpl3" class="com.seesawin.IOC.dao.impl.DaoImpl3"></bean>
+</beans>
