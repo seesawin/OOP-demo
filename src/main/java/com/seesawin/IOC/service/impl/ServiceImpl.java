@@ -10,4 +10,8 @@ public class ServiceImpl implements Service {
 	public String getName() {
 		return dao.getName();
 	}
+
+	public String getName(String name) {
+		return dao.getName(name);
+	}
 }

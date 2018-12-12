@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="UserBean1" class="com.seesawin.DI.UserBean">
+		<property name="id" value="0001"></property>
+		<property name="name" value="Tom"></property>
+		<property name="age" value="20"></property>
+		<property name="brDate" value="2000/05/09"></property>
+		<property name="order" ref="Order2"></property>
+	</bean>
+
+	<bean id="UserBean2" class="com.seesawin.DI.UserBean">
+		<constructor-arg value="0002" index="0"></constructor-arg>
+		<constructor-arg value="Candy" index="1"></constructor-arg>
+		<constructor-arg value="18" index="2"></constructor-arg>
+		<constructor-arg value="1999/11/22" index="3"></constructor-arg>
+		<constructor-arg index="4" ref="Order2"></constructor-arg>
+	</bean>
+
+	<bean id="Order1" class="com.seesawin.DI.Order" scope="singleton">
+		<property name="orderDtl">
+			<list value-type="com.seesawin.DI.OrderDtl">
+				<ref bean="OrderDtl1" />
+				<ref bean="OrderDtl1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="Order2" class="com.seesawin.DI.Order" scope="prototype"
+		lazy-init="true">
+		<constructor-arg>
+			<list value-type="com.seesawin.DI.OrderDtl">
+				<ref bean="OrderDtl2" />
+				<ref bean="OrderDtl2" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="OrderDtl1" class="com.seesawin.DI.OrderDtl" scope="singleton">
+	</bean>
+
+	<bean id="OrderDtl2" class="com.seesawin.DI.OrderDtl" scope="prototype">
+	</bean>
+</beans>

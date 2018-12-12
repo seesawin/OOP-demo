@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<!-- service -->
+	<bean id="ServiceImpl" class="com.seesawin.IOC.service.impl.ServiceImpl">
+	</bean>
+
+	<bean id="ServiceImpl2" class="com.seesawin.IOC.service.impl.ServiceImpl2">
+		<constructor-arg ref="DaoImpl2"></constructor-arg>
+	</bean>
+	<bean id="ServiceImpl3" class="com.seesawin.IOC.service.impl.ServiceImpl3">
+		<property name="dao" ref="DaoImpl3"></property>
+	</bean>
+
+	<!-- dao -->
+	<bean id="DaoImpl2" class="com.seesawin.IOC.dao.impl.DaoImpl2"></bean>
+	<bean id="DaoImpl3" class="com.seesawin.IOC.dao.impl.DaoImpl3"></bean>
+	
+	<!-- advice -->
+	<bean id="logAdvice" class="com.seesawin.AOP.spring.LogAdvice"></bean>
+	<aop:config>
+		<aop:aspect id="logAspect" ref="logAdvice">
+			<aop:pointcut
+				expression="execution(* com.seesawin.IOC.service.impl.*.*(..))"
+				id="pointCut1" />
+			<aop:before method="logBefore" pointcut-ref="pointCut1" />
+			<aop:after-returning method="logAfter"
+				pointcut-ref="pointCut1" returning="result" />
+			<aop:around method="logAround" pointcut-ref="pointCut1" />
+		</aop:aspect>
+	</aop:config>
+</beans>

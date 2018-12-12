@@ -6,4 +6,8 @@ public class DaoImpl3 implements Dao{
 	public String getName() {
 		return "Andy Hsu";
 	}
+	
+	public String getName(String name) {
+		return "Hello " + name + "!";
+	}
 }
